@@ -9,21 +9,22 @@ import SwiftUI
 
 struct NavigationViewBootcamp: View {
     var body: some View {
-        NavigationStack {
-            
+        NavigationView {
             ScrollView {
                 
-                    
-                    NavigationLink("Hello, WORLD!",
-                                   destination: OneNewScreen())
-                Text("Hello, World!")
+                NavigationLink("Hello, World!", destination: MyOtherScreen())
+                
                 Text("Hello, World!")
                 Text("Hello, World!")
                 Text("Hello, World!")
             }
-            .navigationTitle("All inboxes")
+            
+            .navigationTitle("All Inboxes")
 //            .navigationBarTitleDisplayMode(.automatic)
-//            .toolbar(.hidden)
+//            .navigationBarHidden(true)
+//            .toolbar(Visibility.hidden)
+            
+            
             .toolbar{
                 ToolbarItem(placement: .topBarLeading){
                     HStack {
@@ -31,18 +32,22 @@ struct NavigationViewBootcamp: View {
                         Image(systemName: "flame.fill")
                     }
                 }
+                
                 ToolbarItem(placement: .topBarTrailing){
-                    NavigationLink(destination: OneNewScreen(),
-                                   label:{
-                        Image(systemName: "gear")
-                    }).tint(Color.green)
+                    NavigationLink(
+                        destination: MyOtherScreen(),
+                        label: {
+                            Image(systemName: "gear")
+                        }
+                    )
+                    .tint(Color.red)
                 }
-            }
+                }
         }
     }
 }
 
-struct OneNewScreen: View {
+struct MyOtherScreen: View {
     
     @Environment(\.dismiss) var dismiss
     
@@ -50,14 +55,13 @@ struct OneNewScreen: View {
         ZStack{
             Color.green.ignoresSafeArea()
                 .navigationTitle("Green Screen")
-                .toolbar(.hidden)
+                .toolbar(Visibility.hidden)
             
             VStack {
-                Button("Back Button"){
+                Button("Back button"){
                     dismiss()
                 }
-                NavigationLink("Click here",
-                               destination: Text("3rd screen!!!"))
+                NavigationLink("Click here", destination: Text("3rd screen"))
             }
         }
     }
